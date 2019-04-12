@@ -349,7 +349,7 @@ export const constantRouterMap = [{
     {
         path: '/heal',
         component: Layout,
-        redirect: '/sms/heal',
+        redirect: '/heal/story',
         name: 'heal',
         meta: { title: '健康', icon: 'sms-ad' },
         children: [{
@@ -357,14 +357,22 @@ export const constantRouterMap = [{
                 name: 'story',
                 component: () =>
                     import ('@/views/heal/story/storyList'),
-                meta: { title: '蜕变故事', icon: 'sms-flash' }
+                meta: { title: '蜕变故事', icon: 'marker' }
+            },
+            {
+                path: 'storyAdd',
+                name: 'storyadd',
+                component: () =>
+                    import ('@/views/heal/story/components/storyadd'),
+                meta: { title: '故事编辑', icon: 'sms-flash' },
+                hidden: true
             },
             {
                 path: 'storyupdata',
                 name: 'storyupdata',
                 component: () =>
                     import ('@/views/heal/story/storysupdate'),
-                meta: { title: '编辑', icon: 'sms-flash' },
+                meta: { title: '故事添加', icon: 'sms-flash' },
                 hidden: true
             },
             {
@@ -388,6 +396,167 @@ export const constantRouterMap = [{
                 component: () =>
                     import ('@/views/heal/news/newsupdate'),
                 meta: { title: '编辑', icon: 'product-brand' },
+                hidden: true
+            }, {
+                path: 'sport',
+                name: 'sport',
+                component: () =>
+                    import ('@/views/heal/sports/storyList'),
+                meta: { title: '运动', icon: 'product-attr' }
+            },
+            {
+                path: 'sportAdd',
+                name: 'sportAdd',
+                component: () =>
+                    import ('@/views/heal/sports/components/storyadd'),
+                meta: { title: '运动项添加', icon: 'product-brand' },
+                hidden: true
+            },
+            {
+                path: 'sportUpdat',
+                name: 'sportAdd',
+                component: () =>
+                    import ('@/views/heal/sports/components/storyUpdata'),
+                meta: { title: '运动项修改', icon: 'product-brand' },
+                hidden: true
+            },
+            {
+                path: 'sportCardList',
+                name: 'sportCardList',
+                component: () =>
+                    import ('@/views/heal/sports/sportCardList'),
+                meta: { title: '运动打卡', icon: 'sms-flash' },
+            },
+            {
+                path: 'foodlist',
+                name: 'foodlist',
+                component: () =>
+                    import ('@/views/heal/food/foodlist'),
+                meta: { title: '食物管理', icon: 'product-list' },
+            },
+            {
+                path: 'foodadd',
+                name: 'foodadd',
+                component: () =>
+                    import ('@/views/heal/food/components/foodadd'),
+                meta: { title: '食物添加', icon: 'product-brand' },
+                hidden: true
+            },
+            {
+                path: 'foodupdate',
+                name: 'foodupdate',
+                component: () =>
+                    import ('@/views/heal/food/foodupdate'),
+                meta: { title: '食物编辑', icon: 'product-brand' },
+                hidden: true
+            },
+            {
+                path: 'foodMenuList',
+                name: 'foodMenuList',
+                component: () =>
+                    import ('@/views/heal/foodMenu/foodMenuList'),
+                meta: { title: '食物分类', icon: 'product-cate' }
+            },
+            {
+                path: 'foodMenuadd',
+                name: 'foodMenuadd',
+                component: () =>
+                    import ('@/views/heal/foodMenu/components/foodMenuadd'),
+                meta: { title: '食物分类添加', icon: 'product-brand' },
+                hidden: true
+            },
+            {
+                path: 'foodMennuUpdate',
+                name: 'foodMennuUpdate',
+                component: () =>
+                    import ('@/views/heal/foodMenu/foodMennuUpdate'),
+                meta: { title: '食物分类编辑', icon: 'sms-hot' },
+                hidden: true
+            },
+            {
+                path: 'healthGrogramList',
+                name: 'healthGrogramList',
+                component: () =>
+                    import ('@/views/heal/healthGrogram/healthGrogramList'),
+                meta: { title: '健康方案推荐', icon: 'form' }
+            },
+            {
+                path: 'healthGrogramAdd',
+                name: 'healthGrogramAdd',
+                component: () =>
+                    import ('@/views/heal/healthGrogram/components/healthGrogramAdd'),
+                meta: { title: '健康方案推荐添加', icon: 'form' },
+                hidden: true
+            },
+            {
+                path: 'healthGrogramUpdate',
+                name: 'healthGrogramUpdate',
+                component: () =>
+                    import ('@/views/heal/healthGrogram/healthGrogramUpdate'),
+                meta: { title: '健康方案推荐编辑', icon: 'form' },
+                hidden: true
+            },
+            {
+                path: 'healthCategory',
+                name: 'healthCategory',
+                component: () =>
+                    import ('@/views/heal/healthCategory/index'),
+                meta: { title: '健康方案分类', icon: 'product' }
+            },
+            {
+                path: 'healthCategoryupdate',
+                name: 'healthCategoryupdate',
+                component: () =>
+                    import ('@/views/heal/healthCategory/update'),
+                meta: { title: '健康方案分类编辑', icon: 'product' },
+                hidden: true
+            },
+            {
+                path: 'healthCategoryadd',
+                name: 'healthCategoryadd',
+                component: () =>
+                    import ('@/views/heal/healthCategory/components/ProductCateDetail'),
+                meta: { title: '健康方案分类添加', icon: 'product' },
+                hidden: true
+            },
+            {
+                path: 'healthChildList',
+                name: 'healthChildList',
+                component: () =>
+                    import ('@/views/heal/healthCategory/indexChild'),
+                meta: { title: '健康方案子类', icon: 'product' },
+                hidden: true
+            },
+            {
+                path: 'CategoryChildList',
+                name: 'CategoryChildList',
+                component: () =>
+                    import ('@/views/heal/CategoryChild/CategoryChildList'),
+                meta: { title: '健康方案子类', icon: 'product' },
+                hidden: true
+            },
+            {
+                path: 'CategoryChildList',
+                name: 'CategoryChildList',
+                component: () =>
+                    import ('@/views/heal/CategoryChild/CategoryChildList'),
+                meta: { title: '健康方案子类', icon: 'product' },
+                hidden: true
+            },
+            {
+                path: 'CategoryChildAdd',
+                name: 'CategoryChildAdd',
+                component: () =>
+                    import ('@/views/heal/CategoryChild/components/CategoryChildAdd'),
+                meta: { title: '健康方案子类添加', icon: 'product' },
+                hidden: true
+            },
+            {
+                path: 'CategoryChildUpdate',
+                name: 'CategoryChildUpdate',
+                component: () =>
+                    import ('@/views/heal/CategoryChild/CategoryChildUpdate'),
+                meta: { title: '健康方案子类编辑', icon: 'product' },
                 hidden: true
             }
         ]

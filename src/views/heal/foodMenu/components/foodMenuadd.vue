@@ -7,24 +7,10 @@
       label-width="150px"
       size="small"
     >
-      <el-form-item label="名称：" prop="" >
-        <el-input v-model="homeAdvertise.informationName" class="input-width" ></el-input>
-      </el-form-item>
-      <el-form-item label="来源：" prop="informationSource">
-        <el-input v-model="homeAdvertise.informationSource" class="input-width"></el-input>
+      <el-form-item label="食物名称：" prop="foodMenuName">
+        <el-input v-model="homeAdvertise.foodMenuName" class="input-width"></el-input>
       </el-form-item>
 
-      <el-form-item label="开始时间：" prop="createTime">
-        <el-date-picker type="datetime" placeholder="选择日期" v-model="homeAdvertise.createTime"></el-date-picker>
-      </el-form-item>
-    
-      <el-form-item label="图片：">
-        <single-upload v-model="homeAdvertise.icon"></single-upload>
-      </el-form-item>
-    
-      <el-form-item label="内容：" prop="">
-        <quill-editor :content="homeAdvertise.informationContent" @change="onEditorChange($event)"></quill-editor>
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('homeAdvertiseFrom')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('homeAdvertiseFrom')">重置</el-button>
@@ -33,16 +19,14 @@
   </el-card>
 </template>
 <script>
-import SingleUpload from "@/components/Upload/singleUpload";
-import { quillEditor } from "vue-quill-editor";
+import SingleUpload from "@/components/Upload/singleUpload"; 
 
 import {
-  createHomeAdvertise,
-  getHomeAdvertise,
-  updateHomeAdvertise
-} from "@/api/homeAdvertise";
-
-import { fetchNewsAdd, fetchNewsUpdate, fetchNewsdate } from "@/api/health";
+  fetchFoodMenuCreate,
+  fetchFoodMenuUpdateInfo,
+  fetchFoodMenuUpdate
+  
+} from "@/api/foodMenu";
 const defaultTypeOptions = [
   {
     label: "PC首页轮播",
@@ -54,11 +38,7 @@ const defaultTypeOptions = [
   }
 ];
 const defaultHomeAdvertise = { 
-  informationName: "",
-  informationSource: null,
-  icon: null,
-  createTime: null,
-  informationContent: ""
+  foodMenuName: ''
 };
 export default {
   name: "HomeAdvertiseDetail",
@@ -72,31 +52,32 @@ export default {
   data() {
     return {
       homeAdvertise: null,
+      ruleForm: {
+        name: "",
+        region: "",
+        date1: "",
+        date2: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: ""
+      },
       rules: {
-        name: [
-          { required: true, message: "请输入广告名称", trigger: "blur" },
-          {
-            min: 2,
-            max: 140,
-            message: "长度在 2 到 140 个字符",
-            trigger: "blur"
-          }
+        foodMenuName: [
+          { required: true, message: "请输入食物名称", trigger: "blur" }
         ],
-        url: [{ required: true, message: "请输入广告链接", trigger: "blur" }],
-        startTime: [
-          { required: true, message: "请选择开始时间", trigger: "blur" }
+        foodEvaluation: [
+          { required: true, message: "请输入食物描述", trigger: "blur" }
         ],
-        endTime: [
-          { required: true, message: "请选择到期时间", trigger: "blur" }
-        ],
-        pic: [{ required: true, message: "请选择广告图片", trigger: "blur" }]
+        foodLevel: [{ required: true, message: "请输入级别", trigger: "blur" }],
+        url: [{ required: true, message: "请输入广告链接", trigger: "blur" }]
       },
       typeOptions: Object.assign({}, defaultTypeOptions)
     };
   },
   created() {
     if (this.isEdit) {
-      fetchNewsdate(this.$route.query.id).then(response => {
+      fetchFoodMenuUpdateInfo(this.$route.query.id).then(response => {
         this.homeAdvertise = response.data;
       });
     } else {
@@ -106,7 +87,8 @@ export default {
   methods: {
     onEditorChange({ quill, html, text }) {
       this.content = html;
-      this.homeAdvertise.informationContent = this.content; 
+      this.homeAdvertise.storyContent = this.content;
+      console.log(this.homeAdvertise.storyContent);
     },
     onSubmit(formName) {
       this.$refs[formName].validate(valid => {
@@ -117,7 +99,7 @@ export default {
             type: "warning"
           }).then(() => {
             if (this.isEdit) {
-              fetchNewsUpdate(this.$route.query.id, this.homeAdvertise).then(
+              fetchFoodMenuUpdate(this.$route.query.id, this.homeAdvertise).then(
                 response => {
                   this.$refs[formName].resetFields();
                   this.$message({
@@ -129,7 +111,7 @@ export default {
                 }
               );
             } else {
-              fetchNewsAdd(this.homeAdvertise).then(response => {
+              fetchFoodMenuCreate(this.homeAdvertise).then(response => {
                 this.$refs[formName].resetFields();
                 this.homeAdvertise = Object.assign({}, defaultHomeAdvertise);
                 this.$message({

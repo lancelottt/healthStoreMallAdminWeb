@@ -7,7 +7,7 @@
     </el-card>
     <div class="table-container">
       <el-table ref="flashTable" :data="list" style="width: 100%;" v-loading="listLoading" border>
-        <el-table-column type="selection" width="60" align="center"></el-table-column>
+        <!-- <el-table-column type="selection" width="60" align="center"></el-table-column> -->
         <el-table-column label="编号" width="100" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>

@@ -3,37 +3,28 @@
     <el-card class="operate-container" shadow="never">
       <i class="el-icon-tickets"></i>
       <span>数据列表</span>
-      <el-button size="mini" class="btn-add" @click="handleAdd()" style="margin-left: 20px">添加</el-button>
     </el-card>
     <div class="table-container">
-      <el-table ref="flashTable" :data="list" style="width: 100%;" v-loading="listLoading" border>
-        <el-table-column type="selection" width="60" align="center"></el-table-column>
-        <el-table-column label="编号" width="100" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
-        </el-table-column>
-        <el-table-column label="标题" align="center">
-          <template slot-scope="scope">{{scope.row.storyTitle}}</template>
-        </el-table-column>
-        <el-table-column label="作者" width="140" align="center">
-          <template slot-scope="scope">{{scope.row.storyAuthor}}</template>
-        </el-table-column>
-        <el-table-column label="封面" width="140" align="center">
-          <template slot-scope="scope">
-            <img v-bind:src="scope.row.icon" width="50" height="50">
-          </template>
-        </el-table-column>
-        <el-table-column label="创建时间" width="140" align="center">
-          <template slot-scope="scope">{{scope.row.createTime | formatDate}}</template>
+      <el-table
+        ref="flashTable"
+        :data="list"
+        style="width: 100%;"
+        v-loading="listLoading"
+        highlight-current-row
+        border
+      >
+        <el-table-column type="index"></el-table-column>
+
+        <el-table-column label="用户名" align="center">
+          <template slot-scope="scope">{{scope.row.itemName}}</template>
         </el-table-column>
 
-        <el-table-column label="操作" width="180" align="center">
-          <template slot-scope="scope">
-            <el-button size="mini" type="text" @click="handleUpdate(scope.$index, scope.row)">编辑</el-button>
-            <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          </template>
+        <el-table-column label="打卡时间" width="140" align="center">
+          <template slot-scope="scope">{{scope.row.createTime | formatDate}}</template>
         </el-table-column>
       </el-table>
     </div>
+    
     <div class="pagination-container">
       <el-pagination
         background
@@ -63,7 +54,7 @@
   </div>
 </template>
 <script>
-import { fetchStoryList, fetchStoryDelete } from "@/api/story";
+import { fetchSportsCard } from "@/api/sports";
 import { formatDate } from "@/utils/date";
 
 const defaultListQuery = {
@@ -115,7 +106,7 @@ export default {
   },
   methods: {
     handleAdd() {
-          this.$router.push({path: '/heal/storyAdd'})
+      this.$router.push({ path: "/heal/sportAdd" });
     },
     handleResetSearch() {
       this.listQuery = Object.assign({}, defaultListQuery);
@@ -163,7 +154,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        fetchStoryDelete(row.id).then(response => {
+        fetchSportsDelete(row.userAthleticItemCode).then(response => {
           this.$message({
             type: "success",
             message: "删除成功!"
@@ -173,10 +164,11 @@ export default {
       });
     },
     handleUpdate(index, row) {
-      // this.dialogVisible = true;
-      // this.isEdit = true;
-      // this.flashPromotion = Object.assign({}, row);
-      this.$router.push({path:'/heal/storyupdata', query:{id: row.id}});
+      this.$router.push({
+        path: "/heal/sportUpdat",
+        query: { id: row.userAthleticItemCode }
+      });
+      console.log(row.userAthleticItemCode);
     },
     handleDialogConfirm() {
       this.$confirm("是否要确认?", "提示", {
@@ -207,9 +199,9 @@ export default {
         }
       });
     },
-    getList() { 
+    getList() {
       this.listLoading = true;
-      fetchStoryList(this.listQuery).then(response => {
+      fetchSportsCard(this.listQuery).then(response => {
         this.listLoading = false;
         this.list = response.data.list;
         this.total = response.data.total;
@@ -218,5 +210,4 @@ export default {
   }
 };
 </script>
-<style>
-</style>
+<style></style>

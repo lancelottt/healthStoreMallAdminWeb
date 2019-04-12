@@ -39,7 +39,7 @@
         </el-radio-group>
       </el-form-item>-->
       <el-form-item label="图片：">
-        <single-upload v-model="homeAdvertise.icon" ></single-upload>
+        <single-upload v-model="homeAdvertise.icon"></single-upload>
       </el-form-item>
       <!-- <el-form-item label="排序：">
         <el-input v-model="homeAdvertise.icon" class="input-width"></el-input>
@@ -57,7 +57,11 @@
         </el-input>
       </el-form-item>-->
       <el-form-item label="内容：" prop="storyContent">
-        <quill-editor :content="homeAdvertise.storyContent" @change="onEditorChange($event)"></quill-editor>
+        <quill-editor
+          :content="homeAdvertise.storyContent"
+          @change="onEditorChange($event)"
+        
+        ></quill-editor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('homeAdvertiseFrom')">提交</el-button>
@@ -70,13 +74,14 @@
 import SingleUpload from "@/components/Upload/singleUpload";
 import { quillEditor } from "vue-quill-editor";
 
+
 import {
   createHomeAdvertise,
   getHomeAdvertise,
   updateHomeAdvertise
 } from "@/api/homeAdvertise";
 
-import { fetchStoryAdd, fetchStoryUpdate,fetchStorydate } from "@/api/story";
+import { fetchStoryAdd, fetchStoryUpdate, fetchStorydate } from "@/api/story";
 const defaultTypeOptions = [
   {
     label: "PC首页轮播",
@@ -102,7 +107,7 @@ const defaultHomeAdvertise = {
   storyAuthor: null,
   icon: null,
   createTime: null,
-  storyContent: "<p>45456</p>"
+  storyContent: ""
 };
 export default {
   name: "HomeAdvertiseDetail",
@@ -114,7 +119,7 @@ export default {
     }
   },
   data() {
-    return {
+    return { 
       homeAdvertise: null,
       rules: {
         name: [
@@ -148,12 +153,10 @@ export default {
     }
   },
   methods: {
-     onEditorChange({ quill, html, text }) {
-        // console.log('editor change!', quill, html, text)
-        this.content = html;
-        this.homeAdvertise.storyContent = this.content;
-        console.log(this.content ,this.homeAdvertise.storyContent )
-      },
+    onEditorChange({ quill, html, text }) {
+      this.content = html;
+      this.homeAdvertise.storyContent = this.content; 
+    },
     onSubmit(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -163,18 +166,17 @@ export default {
             type: "warning"
           }).then(() => {
             if (this.isEdit) {
-              fetchStoryUpdate(
-                this.$route.query.id,
-                this.homeAdvertise
-              ).then(response => {
-                this.$refs[formName].resetFields();
-                this.$message({
-                  message: "修改成功",
-                  type: "success",
-                  duration: 1000
-                });
-                this.$router.back();
-              });
+              fetchStoryUpdate(this.$route.query.id, this.homeAdvertise).then(
+                response => {
+                  this.$refs[formName].resetFields();
+                  this.$message({
+                    message: "修改成功",
+                    type: "success",
+                    duration: 1000
+                  });
+                  this.$router.back();
+                }
+              );
             } else {
               fetchStoryAdd(this.homeAdvertise).then(response => {
                 this.$refs[formName].resetFields();

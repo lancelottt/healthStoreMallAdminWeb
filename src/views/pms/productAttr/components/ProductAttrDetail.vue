@@ -134,7 +134,7 @@
         this.productAttr.type = Number(this.$route.query.type);
       },
       onSubmit(formName) {
-        this.$refs[formName].validate((valid) => {
+        this.$s[formName].validate((valid) => {
           if (valid) {
             this.$confirm('是否提交数据', '提示', {
               confirmButtonText: '确定',

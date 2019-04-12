@@ -7,24 +7,33 @@
       label-width="150px"
       size="small"
     >
-      <el-form-item label="名称：" prop="" >
-        <el-input v-model="homeAdvertise.informationName" class="input-width" ></el-input>
-      </el-form-item>
-      <el-form-item label="来源：" prop="informationSource">
-        <el-input v-model="homeAdvertise.informationSource" class="input-width"></el-input>
+      <el-form-item label="标题：" prop>
+        <el-input v-model="homeAdvertise.name" class="input-width"></el-input>
       </el-form-item>
 
-      <el-form-item label="开始时间：" prop="createTime">
-        <el-date-picker type="datetime" placeholder="选择日期" v-model="homeAdvertise.createTime"></el-date-picker>
+      <el-form-item label="分类名称:">
+        <el-select v-model="homeAdvertise.programCategoryId" placeholder="请选择分类">
+          <el-option
+            v-for="item in productCategoryList"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id"
+          ></el-option>
+        </el-select>
       </el-form-item>
-    
+
+      <el-form-item label="来源" prop>
+        <el-input v-model="homeAdvertise.source" class="input-width"></el-input>
+      </el-form-item>
+
       <el-form-item label="图片：">
-        <single-upload v-model="homeAdvertise.icon"></single-upload>
+        <single-upload v-model="homeAdvertise.pic"></single-upload>
       </el-form-item>
-    
-      <el-form-item label="内容：" prop="">
-        <quill-editor :content="homeAdvertise.informationContent" @change="onEditorChange($event)"></quill-editor>
+
+      <el-form-item label="内容：" prop>
+        <quill-editor :content="homeAdvertise.content" @change="onEditorChange($event)"></quill-editor>
       </el-form-item>
+
       <el-form-item>
         <el-button type="primary" @click="onSubmit('homeAdvertiseFrom')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('homeAdvertiseFrom')">重置</el-button>
@@ -34,15 +43,12 @@
 </template>
 <script>
 import SingleUpload from "@/components/Upload/singleUpload";
-import { quillEditor } from "vue-quill-editor";
-
+import { fetchCategoryChildrenList } from "@/api/healthCategory";
 import {
-  createHomeAdvertise,
-  getHomeAdvertise,
-  updateHomeAdvertise
-} from "@/api/homeAdvertise";
-
-import { fetchNewsAdd, fetchNewsUpdate, fetchNewsdate } from "@/api/health";
+  fetchHealthCreate,
+  fetchHealthUpdateInfo,
+  fetchHealthUpdate
+} from "@/api/healthGrogram";
 const defaultTypeOptions = [
   {
     label: "PC首页轮播",
@@ -53,12 +59,12 @@ const defaultTypeOptions = [
     value: 1
   }
 ];
-const defaultHomeAdvertise = { 
-  informationName: "",
-  informationSource: null,
-  icon: null,
-  createTime: null,
-  informationContent: ""
+const defaultHomeAdvertise = {
+  content: null,
+  name: null,
+  pic: null,
+  programCategoryId: null,
+  source: null
 };
 export default {
   name: "HomeAdvertiseDetail",
@@ -71,42 +77,58 @@ export default {
   },
   data() {
     return {
+      productCategoryList: null,
       homeAdvertise: null,
-      rules: {
-        name: [
-          { required: true, message: "请输入广告名称", trigger: "blur" },
-          {
-            min: 2,
-            max: 140,
-            message: "长度在 2 到 140 个字符",
-            trigger: "blur"
-          }
-        ],
-        url: [{ required: true, message: "请输入广告链接", trigger: "blur" }],
-        startTime: [
-          { required: true, message: "请选择开始时间", trigger: "blur" }
-        ],
-        endTime: [
-          { required: true, message: "请选择到期时间", trigger: "blur" }
-        ],
-        pic: [{ required: true, message: "请选择广告图片", trigger: "blur" }]
+      ruleForm: {
+        name: "",
+        region: "",
+        date1: "",
+        date2: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: ""
       },
-      typeOptions: Object.assign({}, defaultTypeOptions)
+      rules: {
+        foodMenuName: [
+          { required: true, message: "请输入食物名称", trigger: "blur" }
+        ],
+        foodEvaluation: [
+          { required: true, message: "请输入食物描述", trigger: "blur" }
+        ],
+        foodLevel: [{ required: true, message: "请输入级别", trigger: "blur" }],
+        url: [{ required: true, message: "请输入广告链接", trigger: "blur" }]
+      },
+      typeOptions: Object.assign({}, defaultTypeOptions),
+      childrenList: null
     };
   },
   created() {
     if (this.isEdit) {
-      fetchNewsdate(this.$route.query.id).then(response => {
+      fetchHealthUpdateInfo(this.$route.query.id).then(response => {
         this.homeAdvertise = response.data;
       });
     } else {
       this.homeAdvertise = Object.assign({}, defaultHomeAdvertise);
     }
+    this.categoryMenu();
   },
   methods: {
+    categoryMenu() {
+      fetchCategoryChildrenList().then(res => {
+        var parentsList = [];
+        var chiidList = [];
+        res.data.map(item => {
+          if (item.children.length > 0) {
+            parentsList.push(...item.children);
+          }
+        });
+        this.productCategoryList = parentsList;
+      });
+    },
     onEditorChange({ quill, html, text }) {
-      this.content = html;
-      this.homeAdvertise.informationContent = this.content; 
+      this.homeAdvertise.content = html; 
+      console.log(html,this.homeAdvertise.content);
     },
     onSubmit(formName) {
       this.$refs[formName].validate(valid => {
@@ -117,7 +139,7 @@ export default {
             type: "warning"
           }).then(() => {
             if (this.isEdit) {
-              fetchNewsUpdate(this.$route.query.id, this.homeAdvertise).then(
+              fetchHealthUpdate(this.$route.query.id, this.homeAdvertise).then(
                 response => {
                   this.$refs[formName].resetFields();
                   this.$message({
@@ -129,7 +151,7 @@ export default {
                 }
               );
             } else {
-              fetchNewsAdd(this.homeAdvertise).then(response => {
+              fetchHealthCreate(this.homeAdvertise).then(response => {
                 this.$refs[formName].resetFields();
                 this.homeAdvertise = Object.assign({}, defaultHomeAdvertise);
                 this.$message({
@@ -137,6 +159,7 @@ export default {
                   type: "success",
                   duration: 1000
                 });
+                this.$router.back();
               });
             }
           });

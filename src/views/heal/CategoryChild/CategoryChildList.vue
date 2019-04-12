@@ -6,24 +6,29 @@
       <el-button size="mini" class="btn-add" @click="handleAdd()" style="margin-left: 20px">添加</el-button>
     </el-card>
     <div class="table-container">
-      <el-table ref="flashTable" :data="list" style="width: 100%;" v-loading="listLoading" border>
-        <el-table-column type="selection" width="60" align="center"></el-table-column>
+      <el-table
+        ref="flashTable"
+        :data="list"
+        style="width: 100%;"
+        v-loading="listLoading"
+        highlight-current-row
+        border
+      >
+        <!-- <el-table-column type="selection" width="60" align="center"></el-table-column> -->
         <el-table-column label="编号" width="100" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
-        <el-table-column label="标题" align="center">
-          <template slot-scope="scope">{{scope.row.storyTitle}}</template>
+        <el-table-column label="名称" align="center">
+          <template slot-scope="scope">{{scope.row.name}}</template>
         </el-table-column>
-        <el-table-column label="作者" width="140" align="center">
-          <template slot-scope="scope">{{scope.row.storyAuthor}}</template>
-        </el-table-column>
+
         <el-table-column label="封面" width="140" align="center">
           <template slot-scope="scope">
             <img v-bind:src="scope.row.icon" width="50" height="50">
           </template>
         </el-table-column>
         <el-table-column label="创建时间" width="140" align="center">
-          <template slot-scope="scope">{{scope.row.createTime | formatDate}}</template>
+          <template slot-scope="scope">{{scope.row.creatTime | formatDate}}</template>
         </el-table-column>
 
         <el-table-column label="操作" width="180" align="center">
@@ -34,6 +39,7 @@
         </el-table-column>
       </el-table>
     </div>
+    
     <div class="pagination-container">
       <el-pagination
         background
@@ -62,8 +68,8 @@
     </el-dialog>
   </div>
 </template>
-<script>
-import { fetchStoryList, fetchStoryDelete } from "@/api/story";
+<script> 
+import { fetchCategoryList ,fetchCategoryDelete} from "@/api/healthCategory";
 import { formatDate } from "@/utils/date";
 
 const defaultListQuery = {
@@ -115,7 +121,7 @@ export default {
   },
   methods: {
     handleAdd() {
-          this.$router.push({path: '/heal/storyAdd'})
+      this.$router.push({ path: "/heal/CategoryChildAdd",query:{parentId: this.$route.query.parentId } });
     },
     handleResetSearch() {
       this.listQuery = Object.assign({}, defaultListQuery);
@@ -163,7 +169,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        fetchStoryDelete(row.id).then(response => {
+        fetchCategoryDelete(row.id).then(response => {
           this.$message({
             type: "success",
             message: "删除成功!"
@@ -173,10 +179,10 @@ export default {
       });
     },
     handleUpdate(index, row) {
-      // this.dialogVisible = true;
-      // this.isEdit = true;
-      // this.flashPromotion = Object.assign({}, row);
-      this.$router.push({path:'/heal/storyupdata', query:{id: row.id}});
+      this.$router.push({
+        path: "/heal/CategoryChildUpdate",
+        query: { id: row.id }
+      });
     },
     handleDialogConfirm() {
       this.$confirm("是否要确认?", "提示", {
@@ -207,13 +213,17 @@ export default {
         }
       });
     },
-    getList() { 
+    getList() {
+      console.log("蜕变故事");
+      console.log(this.$route.query.parentId);
       this.listLoading = true;
-      fetchStoryList(this.listQuery).then(response => {
-        this.listLoading = false;
-        this.list = response.data.list;
-        this.total = response.data.total;
-      });
+      fetchCategoryList(this.$route.query.parentId, this.listQuery).then(
+        response => {
+          this.listLoading = false;
+          this.list = response.data.list;
+          this.total = response.data.total;
+        }
+      );
     }
   }
 };
