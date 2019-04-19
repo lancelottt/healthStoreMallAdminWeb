@@ -1,11 +1,4 @@
 import request from '@/utils/request'
-export function fetchStoryList(params) {
-    return request({
-        url: '/modules/hfmmetamorphosisstory/list',
-        method: 'get',
-        params: params
-    })
-}
 export function fetchBooksList(params) {
     return request({
         url: '/navDic/list/nacClassifyDic',
