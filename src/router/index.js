@@ -779,7 +779,192 @@ export const constantRouterMap = [{
                     title: '门店编辑',
                     icon: 'product'
                 }
+            },
+
+        ]
+    },
+    //  字典管理结束**
+    //方案列表管理**
+    {
+        path: '/pro',
+        component: Layout,
+        redirect: '/pro/diclist',
+        name: 'pro',
+        meta: {
+            title: '方案管理',
+            icon: 'sms'
+        },
+        children: [{
+                path: 'diclist',
+                name: 'diclist',
+                component: () =>
+                    import ('@/views/pro/diclist/diclist'),
+                meta: {
+                    title: '方案列表',
+                    icon: 'sms-flash'
+                }
+            },
+            {
+                path: 'addPro',
+                name: 'addProduct',
+                component: () =>
+                    import ('@/views/pro/dicList/add'),
+                meta: {
+                    title: '添加方案',
+                    icon: 'sms-coupon'
+                },
+                hidden: false
+            },
+            {
+                path: 'updatePro',
+                name: 'upProduct',
+                component: () =>
+                    import ('@/views/pro/dicList/addUpdate'),
+                meta: {
+                    title: '编辑方案',
+                    icon: 'product-brand'
+                },
+                hidden: false
             }
+        ]
+    },
+    //  方案列表管理结束**
+    //付费方案管理**
+    //	{
+    //		path: '/pay',
+    //		component: Layout,
+    //		redirect: '/pay/payList/paylist',
+    //		name: 'pay',
+    //		meta: {
+    //			title: '付费方案管理',
+    //			icon: 'sms'
+    //		},
+    //		//    	  hidden: false,
+    //		children: [{
+    //			path: 'paylist',
+    //			name: 'paylist',
+    //			component: () =>
+    //				import('@/views/pay/payList/paylist'),
+    //			meta: {
+    //				title: '付费方案列表',
+    //				icon: 'sms-flash'
+    //			},
+    //			//               hidden: false
+    //		}]
+    //
+    //	},
+    {
+        path: '/pay',
+        component: Layout,
+        redirect: '/sms/pay',
+        name: 'pay',
+        meta: {
+            title: '付费方案管理',
+            icon: 'sms-ad'
+        },
+        children: [{
+                path: 'paylist',
+                name: 'paylist',
+                component: () =>
+                    import ('@/views/pay/payList/paylist'),
+                meta: {
+                    title: '付费方案列表',
+                    icon: 'sms-flash'
+                }
+            },
+            //          添加**
+            {
+                path: 'addpay',
+                name: 'addpay',
+                component: () =>
+                    import ('@/views/pay/payList/add'),
+                meta: {
+                    title: '添加',
+                    icon: 'sms-flash'
+                },
+                hidden: true
+            },
+            //			编辑**
+            {
+                path: 'addupdate',
+                name: 'addupdate',
+                component: () =>
+                    import ('@/views/pay/payList/addUpdate'),
+                meta: {
+                    title: '编辑',
+                    icon: 'sms-flash'
+                },
+                hidden: true
+            },
+            //添加下级列表结束**
+            //          提醒项分类**
+            {
+                path: 'remind',
+                name: 'remind',
+                component: () =>
+                    import ('@/views/dic/remind/remindlist'),
+                meta: {
+                    title: '提醒项分类',
+                    icon: 'product-brand'
+                }
+            },
+            //          提醒项分类结束**
+            {
+                path: 'remindZiji',
+                name: 'remindZiji',
+                component: () =>
+                    import ('@/views/dic/remind/remindZiji'),
+                meta: {
+                    title: '添加提醒项下级列表',
+                    icon: 'sms-flash'
+                },
+                hidden: true
+            }
+        ]
+    },
+
+    //	商城会员管理**
+    {
+        path: '/shop',
+        component: Layout,
+        redirect: '/sms/shop',
+        name: 'shop',
+        meta: {
+            title: '会员管理',
+            icon: 'sms-ad'
+        },
+        children: [{
+                path: 'shoplist',
+                name: 'shoplist',
+                component: () =>
+                    import ('@/views/shoppingMall/shopList/shoplist'),
+                meta: {
+                    title: '会员管理',
+                    icon: 'sms-flash'
+                }
+            },
+            {
+                path: 'decailsShop',
+                name: 'decailsShop',
+                component: () =>
+                    import ('@/views/shoppingMall/shopList/detais'),
+                meta: {
+                    title: '详情'
+                },
+                hidden: true
+            },
+            //          提醒项分类**
+            {
+                path: 'remind',
+                name: 'remind',
+                component: () =>
+                    import ('@/views/dic/remind/remindlist'),
+                meta: {
+                    title: '提醒项分类',
+                    icon: 'product-brand'
+                }
+            }
+
         ]
     },
     {
