@@ -22,7 +22,8 @@ export const constantRouterMap = [{
         path: '/login',
         component: () =>
             import ('@/views/login/index'),
-        hidden: true
+        hidden: true,
+        redirct: '/home'
     },
     {
         path: '/404',
@@ -39,7 +40,10 @@ export const constantRouterMap = [{
             name: 'home',
             component: () =>
                 import ('@/views/home/index'),
-            meta: { title: '首页', icon: 'home' }
+            meta: {
+                title: '首页',
+                icon: 'home'
+            }
         }]
     },
     {
@@ -47,27 +51,39 @@ export const constantRouterMap = [{
         component: Layout,
         redirect: '/pms/product',
         name: 'pms',
-        meta: { title: '商品', icon: 'product' },
+        meta: {
+            title: '商品',
+            icon: 'product'
+        },
         children: [{
                 path: 'product',
                 name: 'product',
                 component: () =>
                     import ('@/views/pms/product/index'),
-                meta: { title: '商品列表', icon: 'product-list' }
+                meta: {
+                    title: '商品列表',
+                    icon: 'product-list'
+                }
             },
             {
                 path: 'addProduct',
                 name: 'addProduct',
                 component: () =>
                     import ('@/views/pms/product/add'),
-                meta: { title: '添加商品', icon: 'product-add' }
+                meta: {
+                    title: '添加商品',
+                    icon: 'product-add'
+                }
             },
             {
                 path: 'updateProduct',
                 name: 'updateProduct',
                 component: () =>
                     import ('@/views/pms/product/update'),
-                meta: { title: '修改商品', icon: 'product-add' },
+                meta: {
+                    title: '修改商品',
+                    icon: 'product-add'
+                },
                 hidden: true
             },
             {
@@ -75,7 +91,10 @@ export const constantRouterMap = [{
                 name: 'productRecycle',
                 component: () =>
                     import ('@/views/pms/product/index'),
-                meta: { title: '商品回收站', icon: 'product-recycle' },
+                meta: {
+                    title: '商品回收站',
+                    icon: 'product-recycle'
+                },
                 hidden: true
             },
             {
@@ -83,7 +102,10 @@ export const constantRouterMap = [{
                 name: 'productComment',
                 component: () =>
                     import ('@/views/pms/product/index'),
-                meta: { title: '商品评价', icon: 'product-comment' },
+                meta: {
+                    title: '商品评价',
+                    icon: 'product-comment'
+                },
                 hidden: true
             },
             {
@@ -91,14 +113,19 @@ export const constantRouterMap = [{
                 name: 'productCate',
                 component: () =>
                     import ('@/views/pms/productCate/index'),
-                meta: { title: '商品分类', icon: 'product-cate' }
+                meta: {
+                    title: '商品分类',
+                    icon: 'product-cate'
+                }
             },
             {
                 path: 'addProductCate',
                 name: 'addProductCate',
                 component: () =>
                     import ('@/views/pms/productCate/add'),
-                meta: { title: '添加商品分类' },
+                meta: {
+                    title: '添加商品分类'
+                },
                 hidden: true
             },
             {
@@ -106,7 +133,9 @@ export const constantRouterMap = [{
                 name: 'updateProductCate',
                 component: () =>
                     import ('@/views/pms/productCate/update'),
-                meta: { title: '修改商品分类' },
+                meta: {
+                    title: '修改商品分类'
+                },
                 hidden: true
             },
             {
@@ -114,14 +143,19 @@ export const constantRouterMap = [{
                 name: 'productAttr',
                 component: () =>
                     import ('@/views/pms/productAttr/index'),
-                meta: { title: '商品类型', icon: 'product-attr' }
+                meta: {
+                    title: '商品类型',
+                    icon: 'product-attr'
+                }
             },
             {
                 path: 'productAttrList',
                 name: 'productAttrList',
                 component: () =>
                     import ('@/views/pms/productAttr/productAttrList'),
-                meta: { title: '商品属性列表' },
+                meta: {
+                    title: '商品属性列表'
+                },
                 hidden: true
             },
             {
@@ -129,7 +163,9 @@ export const constantRouterMap = [{
                 name: 'addProductAttr',
                 component: () =>
                     import ('@/views/pms/productAttr/addProductAttr'),
-                meta: { title: '添加商品属性' },
+                meta: {
+                    title: '添加商品属性'
+                },
                 hidden: true
             },
             {
@@ -137,7 +173,9 @@ export const constantRouterMap = [{
                 name: 'updateProductAttr',
                 component: () =>
                     import ('@/views/pms/productAttr/updateProductAttr'),
-                meta: { title: '修改商品属性' },
+                meta: {
+                    title: '修改商品属性'
+                },
                 hidden: true
             },
             {
@@ -145,14 +183,19 @@ export const constantRouterMap = [{
                 name: 'brand',
                 component: () =>
                     import ('@/views/pms/brand/index'),
-                meta: { title: '品牌管理', icon: 'product-brand' }
+                meta: {
+                    title: '品牌管理',
+                    icon: 'product-brand'
+                }
             },
             {
                 path: 'addBrand',
                 name: 'addBrand',
                 component: () =>
                     import ('@/views/pms/brand/add'),
-                meta: { title: '添加品牌' },
+                meta: {
+                    title: '添加品牌'
+                },
                 hidden: true
             },
             {
@@ -160,7 +203,9 @@ export const constantRouterMap = [{
                 name: 'updateBrand',
                 component: () =>
                     import ('@/views/pms/brand/update'),
-                meta: { title: '编辑品牌' },
+                meta: {
+                    title: '编辑品牌'
+                },
                 hidden: true
             }
         ]
@@ -170,20 +215,28 @@ export const constantRouterMap = [{
         component: Layout,
         redirect: '/oms/order',
         name: 'oms',
-        meta: { title: '订单', icon: 'order' },
+        meta: {
+            title: '订单',
+            icon: 'order'
+        },
         children: [{
                 path: 'order',
                 name: 'order',
                 component: () =>
                     import ('@/views/oms/order/index'),
-                meta: { title: '订单列表', icon: 'product-list' }
+                meta: {
+                    title: '订单列表',
+                    icon: 'product-list'
+                }
             },
             {
                 path: 'orderDetail',
                 name: 'orderDetail',
                 component: () =>
                     import ('@/views/oms/order/orderDetail'),
-                meta: { title: '订单详情' },
+                meta: {
+                    title: '订单详情'
+                },
                 hidden: true
             },
             {
@@ -191,7 +244,9 @@ export const constantRouterMap = [{
                 name: 'deliverOrderList',
                 component: () =>
                     import ('@/views/oms/order/deliverOrderList'),
-                meta: { title: '发货列表' },
+                meta: {
+                    title: '发货列表'
+                },
                 hidden: true
             },
             {
@@ -199,28 +254,39 @@ export const constantRouterMap = [{
                 name: 'orderSetting',
                 component: () =>
                     import ('@/views/oms/order/setting'),
-                meta: { title: '订单设置', icon: 'order-setting' }
+                meta: {
+                    title: '订单设置',
+                    icon: 'order-setting'
+                }
             },
             {
                 path: 'returnApply',
                 name: 'returnApply',
                 component: () =>
                     import ('@/views/oms/apply/index'),
-                meta: { title: '退货申请处理', icon: 'order-return' }
+                meta: {
+                    title: '退货申请处理',
+                    icon: 'order-return'
+                }
             },
             {
                 path: 'returnReason',
                 name: 'returnReason',
                 component: () =>
                     import ('@/views/oms/apply/reason'),
-                meta: { title: '退货原因设置', icon: 'order-return-reason' }
+                meta: {
+                    title: '退货原因设置',
+                    icon: 'order-return-reason'
+                }
             },
             {
                 path: 'returnApplyDetail',
                 name: 'returnApplyDetail',
                 component: () =>
                     import ('@/views/oms/apply/applyDetail'),
-                meta: { title: '退货原因详情' },
+                meta: {
+                    title: '退货原因详情'
+                },
                 hidden: true
             }
         ]
@@ -230,20 +296,28 @@ export const constantRouterMap = [{
         component: Layout,
         redirect: '/sms/coupon',
         name: 'sms',
-        meta: { title: '营销', icon: 'sms' },
+        meta: {
+            title: '营销',
+            icon: 'sms'
+        },
         children: [{
                 path: 'flash',
                 name: 'flash',
                 component: () =>
                     import ('@/views/sms/flash/index'),
-                meta: { title: '秒杀活动列表', icon: 'sms-flash' }
+                meta: {
+                    title: '秒杀活动列表',
+                    icon: 'sms-flash'
+                }
             },
             {
                 path: 'flashSession',
                 name: 'flashSession',
                 component: () =>
                     import ('@/views/sms/flash/sessionList'),
-                meta: { title: '秒杀时间段列表' },
+                meta: {
+                    title: '秒杀时间段列表'
+                },
                 hidden: true
             },
             {
@@ -251,7 +325,9 @@ export const constantRouterMap = [{
                 name: 'selectSession',
                 component: () =>
                     import ('@/views/sms/flash/selectSessionList'),
-                meta: { title: '秒杀时间段选择' },
+                meta: {
+                    title: '秒杀时间段选择'
+                },
                 hidden: true
             },
             {
@@ -259,7 +335,9 @@ export const constantRouterMap = [{
                 name: 'flashProductRelation',
                 component: () =>
                     import ('@/views/sms/flash/productRelationList'),
-                meta: { title: '秒杀商品列表' },
+                meta: {
+                    title: '秒杀商品列表'
+                },
                 hidden: true
             },
             {
@@ -267,14 +345,19 @@ export const constantRouterMap = [{
                 name: 'coupon',
                 component: () =>
                     import ('@/views/sms/coupon/index'),
-                meta: { title: '优惠券列表', icon: 'sms-coupon' }
+                meta: {
+                    title: '优惠券列表',
+                    icon: 'sms-coupon'
+                }
             },
             {
                 path: 'addCoupon',
                 name: 'addCoupon',
                 component: () =>
                     import ('@/views/sms/coupon/add'),
-                meta: { title: '添加优惠券' },
+                meta: {
+                    title: '添加优惠券'
+                },
                 hidden: true
             },
             {
@@ -282,7 +365,9 @@ export const constantRouterMap = [{
                 name: 'updateCoupon',
                 component: () =>
                     import ('@/views/sms/coupon/update'),
-                meta: { title: '修改优惠券' },
+                meta: {
+                    title: '修改优惠券'
+                },
                 hidden: true
             },
             {
@@ -290,7 +375,9 @@ export const constantRouterMap = [{
                 name: 'couponHistory',
                 component: () =>
                     import ('@/views/sms/coupon/history'),
-                meta: { title: '优惠券领取详情' },
+                meta: {
+                    title: '优惠券领取详情'
+                },
                 hidden: true
             },
             {
@@ -298,42 +385,59 @@ export const constantRouterMap = [{
                 name: 'homeBrand',
                 component: () =>
                     import ('@/views/sms/brand/index'),
-                meta: { title: '品牌推荐', icon: 'product-brand' }
+                meta: {
+                    title: '品牌推荐',
+                    icon: 'product-brand'
+                }
             },
             {
                 path: 'new',
                 name: 'homeNew',
                 component: () =>
                     import ('@/views/sms/new/index'),
-                meta: { title: '新品推荐', icon: 'sms-new' }
+                meta: {
+                    title: '新品推荐',
+                    icon: 'sms-new'
+                }
             },
             {
                 path: 'hot',
                 name: 'homeHot',
                 component: () =>
                     import ('@/views/sms/hot/index'),
-                meta: { title: '人气推荐', icon: 'sms-hot' }
+                meta: {
+                    title: '人气推荐',
+                    icon: 'sms-hot'
+                }
             },
             {
                 path: 'subject',
                 name: 'homeSubject',
                 component: () =>
                     import ('@/views/sms/subject/index'),
-                meta: { title: '专题推荐', icon: 'sms-subject' }
+                meta: {
+                    title: '专题推荐',
+                    icon: 'sms-subject'
+                }
             },
             {
                 path: 'advertise',
                 name: 'homeAdvertise',
                 component: () =>
                     import ('@/views/sms/advertise/index'),
-                meta: { title: '广告列表', icon: 'sms-ad' }
+                meta: {
+                    title: '广告列表',
+                    icon: 'sms-ad'
+                }
             },
             {
                 path: 'addAdvertise',
                 name: 'addHomeAdvertise',
                 component: () =>
                     import ('@/views/sms/advertise/add'),
-                meta: { title: '添加广告' },
+                meta: {
+                    title: '添加广告'
+                },
                 hidden: true
             },
             {
@@ -341,7 +445,9 @@ export const constantRouterMap = [{
                 name: 'updateHomeAdvertise',
                 component: () =>
                     import ('@/views/sms/advertise/update'),
-                meta: { title: '编辑广告' },
+                meta: {
+                    title: '编辑广告'
+                },
                 hidden: true
             }
         ]
@@ -351,20 +457,29 @@ export const constantRouterMap = [{
         component: Layout,
         redirect: '/heal/story',
         name: 'heal',
-        meta: { title: '健康', icon: 'sms-ad' },
+        meta: {
+            title: '健康',
+            icon: 'sms-ad'
+        },
         children: [{
                 path: 'story',
                 name: 'story',
                 component: () =>
                     import ('@/views/heal/story/storyList'),
-                meta: { title: '蜕变故事', icon: 'marker' }
+                meta: {
+                    title: '蜕变故事',
+                    icon: 'marker'
+                }
             },
             {
                 path: 'storyAdd',
                 name: 'storyadd',
                 component: () =>
                     import ('@/views/heal/story/components/storyadd'),
-                meta: { title: '故事编辑', icon: 'sms-flash' },
+                meta: {
+                    title: '故事编辑',
+                    icon: 'sms-flash'
+                },
                 hidden: true
             },
             {
@@ -372,7 +487,10 @@ export const constantRouterMap = [{
                 name: 'storyupdata',
                 component: () =>
                     import ('@/views/heal/story/storysupdate'),
-                meta: { title: '故事添加', icon: 'sms-flash' },
+                meta: {
+                    title: '故事添加',
+                    icon: 'sms-flash'
+                },
                 hidden: true
             },
             {
@@ -380,14 +498,20 @@ export const constantRouterMap = [{
                 name: 'news',
                 component: () =>
                     import ('@/views/heal/news/newlist'),
-                meta: { title: '健康资讯', icon: 'product-brand' }
+                meta: {
+                    title: '健康资讯',
+                    icon: 'product-brand'
+                }
             },
             {
                 path: 'newsAdd',
                 name: 'newsAdd',
                 component: () =>
                     import ('@/views/heal/news/components/newadd'),
-                meta: { title: '资讯添加', icon: 'product-brand' },
+                meta: {
+                    title: '资讯添加',
+                    icon: 'product-brand'
+                },
                 hidden: true
             },
             {
@@ -395,21 +519,30 @@ export const constantRouterMap = [{
                 name: 'newsupdata',
                 component: () =>
                     import ('@/views/heal/news/newsupdate'),
-                meta: { title: '编辑', icon: 'product-brand' },
+                meta: {
+                    title: '编辑',
+                    icon: 'product-brand'
+                },
                 hidden: true
             }, {
                 path: 'sport',
                 name: 'sport',
                 component: () =>
                     import ('@/views/heal/sports/storyList'),
-                meta: { title: '运动', icon: 'product-attr' }
+                meta: {
+                    title: '运动',
+                    icon: 'product-attr'
+                }
             },
             {
                 path: 'sportAdd',
                 name: 'sportAdd',
                 component: () =>
                     import ('@/views/heal/sports/components/storyadd'),
-                meta: { title: '运动项添加', icon: 'product-brand' },
+                meta: {
+                    title: '运动项添加',
+                    icon: 'product-brand'
+                },
                 hidden: true
             },
             {
@@ -417,7 +550,10 @@ export const constantRouterMap = [{
                 name: 'sportAdd',
                 component: () =>
                     import ('@/views/heal/sports/components/storyUpdata'),
-                meta: { title: '运动项修改', icon: 'product-brand' },
+                meta: {
+                    title: '运动项修改',
+                    icon: 'product-brand'
+                },
                 hidden: true
             },
             {
@@ -425,21 +561,30 @@ export const constantRouterMap = [{
                 name: 'sportCardList',
                 component: () =>
                     import ('@/views/heal/sports/sportCardList'),
-                meta: { title: '运动打卡', icon: 'sms-flash' },
+                meta: {
+                    title: '运动打卡',
+                    icon: 'sms-flash'
+                },
             },
             {
                 path: 'foodlist',
                 name: 'foodlist',
                 component: () =>
                     import ('@/views/heal/food/foodlist'),
-                meta: { title: '食物管理', icon: 'product-list' },
+                meta: {
+                    title: '食物管理',
+                    icon: 'product-list'
+                },
             },
             {
                 path: 'foodadd',
                 name: 'foodadd',
                 component: () =>
                     import ('@/views/heal/food/components/foodadd'),
-                meta: { title: '食物添加', icon: 'product-brand' },
+                meta: {
+                    title: '食物添加',
+                    icon: 'product-brand'
+                },
                 hidden: true
             },
             {
@@ -447,7 +592,10 @@ export const constantRouterMap = [{
                 name: 'foodupdate',
                 component: () =>
                     import ('@/views/heal/food/foodupdate'),
-                meta: { title: '食物编辑', icon: 'product-brand' },
+                meta: {
+                    title: '食物编辑',
+                    icon: 'product-brand'
+                },
                 hidden: true
             },
             {
@@ -455,14 +603,20 @@ export const constantRouterMap = [{
                 name: 'foodMenuList',
                 component: () =>
                     import ('@/views/heal/foodMenu/foodMenuList'),
-                meta: { title: '食物分类', icon: 'product-cate' }
+                meta: {
+                    title: '食物分类',
+                    icon: 'product-cate'
+                }
             },
             {
                 path: 'foodMenuadd',
                 name: 'foodMenuadd',
                 component: () =>
                     import ('@/views/heal/foodMenu/components/foodMenuadd'),
-                meta: { title: '食物分类添加', icon: 'product-brand' },
+                meta: {
+                    title: '食物分类添加',
+                    icon: 'product-brand'
+                },
                 hidden: true
             },
             {
@@ -470,7 +624,10 @@ export const constantRouterMap = [{
                 name: 'foodMennuUpdate',
                 component: () =>
                     import ('@/views/heal/foodMenu/foodMennuUpdate'),
-                meta: { title: '食物分类编辑', icon: 'sms-hot' },
+                meta: {
+                    title: '食物分类编辑',
+                    icon: 'sms-hot'
+                },
                 hidden: true
             },
             {
@@ -478,14 +635,20 @@ export const constantRouterMap = [{
                 name: 'healthGrogramList',
                 component: () =>
                     import ('@/views/heal/healthGrogram/healthGrogramList'),
-                meta: { title: '健康方案推荐', icon: 'form' }
+                meta: {
+                    title: '健康方案推荐',
+                    icon: 'form'
+                }
             },
             {
                 path: 'healthGrogramAdd',
                 name: 'healthGrogramAdd',
                 component: () =>
                     import ('@/views/heal/healthGrogram/components/healthGrogramAdd'),
-                meta: { title: '健康方案推荐添加', icon: 'form' },
+                meta: {
+                    title: '健康方案推荐添加',
+                    icon: 'form'
+                },
                 hidden: true
             },
             {
@@ -493,7 +656,10 @@ export const constantRouterMap = [{
                 name: 'healthGrogramUpdate',
                 component: () =>
                     import ('@/views/heal/healthGrogram/healthGrogramUpdate'),
-                meta: { title: '健康方案推荐编辑', icon: 'form' },
+                meta: {
+                    title: '健康方案推荐编辑',
+                    icon: 'form'
+                },
                 hidden: true
             },
             {
@@ -501,14 +667,20 @@ export const constantRouterMap = [{
                 name: 'healthCategory',
                 component: () =>
                     import ('@/views/heal/healthCategory/index'),
-                meta: { title: '健康方案分类', icon: 'product' }
+                meta: {
+                    title: '健康方案分类',
+                    icon: 'product'
+                }
             },
             {
                 path: 'healthCategoryupdate',
                 name: 'healthCategoryupdate',
                 component: () =>
                     import ('@/views/heal/healthCategory/update'),
-                meta: { title: '健康方案分类编辑', icon: 'product' },
+                meta: {
+                    title: '健康方案分类编辑',
+                    icon: 'product'
+                },
                 hidden: true
             },
             {
@@ -516,7 +688,10 @@ export const constantRouterMap = [{
                 name: 'healthCategoryadd',
                 component: () =>
                     import ('@/views/heal/healthCategory/components/ProductCateDetail'),
-                meta: { title: '健康方案分类添加', icon: 'product' },
+                meta: {
+                    title: '健康方案分类添加',
+                    icon: 'product'
+                },
                 hidden: true
             },
             {
@@ -524,7 +699,10 @@ export const constantRouterMap = [{
                 name: 'healthChildList',
                 component: () =>
                     import ('@/views/heal/healthCategory/indexChild'),
-                meta: { title: '健康方案子类', icon: 'product' },
+                meta: {
+                    title: '健康方案子类',
+                    icon: 'product'
+                },
                 hidden: true
             },
             {
@@ -532,7 +710,10 @@ export const constantRouterMap = [{
                 name: 'CategoryChildList',
                 component: () =>
                     import ('@/views/heal/CategoryChild/CategoryChildList'),
-                meta: { title: '健康方案子类', icon: 'product' },
+                meta: {
+                    title: '健康方案子类',
+                    icon: 'product'
+                },
                 hidden: true
             },
             {
@@ -540,7 +721,10 @@ export const constantRouterMap = [{
                 name: 'CategoryChildList',
                 component: () =>
                     import ('@/views/heal/CategoryChild/CategoryChildList'),
-                meta: { title: '健康方案子类', icon: 'product' },
+                meta: {
+                    title: '健康方案子类',
+                    icon: 'product'
+                },
                 hidden: true
             },
             {
@@ -548,7 +732,10 @@ export const constantRouterMap = [{
                 name: 'CategoryChildAdd',
                 component: () =>
                     import ('@/views/heal/CategoryChild/components/CategoryChildAdd'),
-                meta: { title: '健康方案子类添加', icon: 'product' },
+                meta: {
+                    title: '健康方案子类添加',
+                    icon: 'product'
+                },
                 hidden: true
             },
             {
@@ -556,16 +743,56 @@ export const constantRouterMap = [{
                 name: 'CategoryChildUpdate',
                 component: () =>
                     import ('@/views/heal/CategoryChild/CategoryChildUpdate'),
-                meta: { title: '健康方案子类编辑', icon: 'product' },
+                meta: {
+                    title: '健康方案子类编辑',
+                    icon: 'product'
+                },
                 hidden: true
+            },
+            {
+                path: 'storeList',
+                name: 'storeList',
+                component: () =>
+                    import ('@/views/heal/storeList/storeList'),
+                meta: {
+                    title: '门店',
+                    icon: 'product'
+                }
+            },
+            {
+                path: 'storeListadd',
+                name: 'storeListadd',
+                component: () =>
+                    import ('@/views/heal/storeList/components/storeListadd'),
+                meta: {
+                    title: '门店',
+                    icon: 'product'
+                },
+                hidden: true
+            },
+            {
+                path: 'storeListUpdate',
+                name: 'storeListUpdate',
+                component: () =>
+                    import ('@/views/heal/storeList/storeListUpdate'),
+                meta: {
+                    title: '门店编辑',
+                    icon: 'product'
+                }
             }
         ]
     },
-    { path: '*', redirect: '/404', hidden: true }
+    {
+        path: '*',
+        redirect: '/404',
+        hidden: true
+    }
 ]
 
 export default new Router({
     // mode: 'history', //后端支持可开
-    scrollBehavior: () => ({ y: 0 }),
+    scrollBehavior: () => ({
+        y: 0
+    }),
     routes: constantRouterMap
 })

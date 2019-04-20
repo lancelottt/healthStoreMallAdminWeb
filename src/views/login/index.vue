@@ -91,14 +91,14 @@
         }
       },
       handleLogin() {
-        
-              this.$router.push({path: '/'})
+        this.$router.push({path: '/'})
         this.$refs.loginForm.validate(valid => {
           if (valid) {
             this.loading = true;
             this.$store.dispatch('Login', this.loginForm).then(() => {
+              console.log('成功！！')
               this.loading = false;
-              this.$router.push({path: '/'})
+              this.$router.push({path: '/home'})
             }).catch(() => {
               this.loading = false
             })
